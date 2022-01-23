@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load cripsy_forms_tags %}
+
+{% block content %}
+{% if data %}
+    <form method="post">
+        {% csrf_token %}
+        <table>{{ form|crispy }}</table>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+{% else %}
+    <p>Something went wrong and the record details couldn't be retrieved.</p>
+{% endif %}
+{% endblock %}

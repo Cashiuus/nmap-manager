@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Upload Nmap XML Scan File</h2>
+
+{% if submitted %}
+    <p class="success">Your scan file was uploaded successfully</p>
+{% else %}
+    <form action="" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <input type="file" name="xmlfile">
+
+        <input type="submit" value="Upload">
+    </form>
+{% endif %}
+{% endblock %}

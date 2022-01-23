@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs %}
+<a href="{% url 'index' %}">{% translate 'Home' %}</a>
+&rsaquo; Scans
+&rsaquo; Policies
+{% endblock breadcrumbs %}
+
+{% block content %}
+<h2>Nmap Scan Policies</h2>
+
+{% if item_list %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Actions</th>
+                <th width="100">Policy Name</th>
+                <th width="100">Scan Type</th>
+                <th width="200">Args</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in item_list %}
+            <tr>
+                <td>
+                    View
+                    Edit
+                    Delete
+                </td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.scan_type }}</td>
+                <td>{{ item.arguments }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No scan policies are currently in your application, go add some!</p>
+{% endif %}
+{% endblock content %}
+
+{% block inline_javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip();
+	// Animate select box length
+	var searchInput = $(".search-box input");
+	var inputGroup = $(".search-box .input-group");
+	var boxWidth = inputGroup.width();
+	searchInput.focus(function(){
+		inputGroup.animate({
+			width: "300"
+		});
+	}).blur(function(){
+		inputGroup.animate({
+			width: boxWidth
+		});
+	});
+});
+</script>
+{% endblock inline_javascript %}
